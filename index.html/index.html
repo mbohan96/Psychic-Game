@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Psychic Game(Basic)</title>
+	
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+	
+	  <h1>The Psychic Game </h1>
+	
+</header>
+	<h2>Guess what letter I'm thinking of</h2>
+
+	<h2> <img src=https://media.giphy.com/media/WDPoOfeQMOx6o/giphy.gif alt="Raven Baxter"></h2>
+	
+		
+			
+	
+			<ul >
+				<li id="correct">correct:</li>
+				<li id="wrong">wrong:</li>
+				<li id="guessesLeft">Remaining:</li>
+				<li id="letter">guesses so far:</li>
+			</ul>
+		
+			
+		
+	<style>
+	
+	body {
+   background-image: url("https://graffitiwallpaper.com/pics/listings/316_wide.jpg");
+   color: magenta;
+   text-align: center;
+   font-weight: bold; 
+   font-size:x-large; 
+   
+    
+
+}
+	
+	
+	
+	</style>
+
+
+<script >
+
+
+var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+// Setting for zero
+var correct = 0;
+var wrong = 0;
+var guessesLeft = 9;
+var letterUser = [];
+var eachofLetters = 26;
+
+
+// Sets the computerGuess variable equal to a random choice from the computerChoice array.
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+function countGuessesLeft() {
+	document.querySelector("#guessesLeft").innerHTML = "guesses left: " + guessesLeft;
+}
+
+function farUserGuesses() {
+	document.querySelector("#letter").innerHTML = "your guesses so far: " + letterUser.join(' ');
+}
+
+countGuessesLeft();
+
+var restart = function() {
+	guessesLeft = 9;
+	letterUser = [];
+	var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+}
+
+// When the user presses a key, it will run the following function..
+document.onkeyup = function(event) {
+	guessesLeft--;
+
+	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+	letterUser.push(userGuess);
+	countGuessesLeft();
+	farUserGuesses();
+
+	if (userGuess === computerGuess){
+		correct++;
+		document.querySelector("#correct").innerHTML = "correct: " + correct;
+		restart();
+	} 
+	else if (guessesLeft === 0) {
+		wrong++;
+		document.querySelector("#wrong").innerHTML = "wrong: " + wrong;
+		restart();
+	}
+  };
+
+</script>
+</body>
+</html>
+
